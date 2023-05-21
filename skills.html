@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Pivot Table Example&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>table {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>th, td {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid black;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: left;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;table id="pivotTable"&gt;&lt;/table&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Function to create the pivot table</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function createPivotTable(data) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var pivotData = {};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Process the data and populate the pivotData object</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (var i = 0; i &lt; data.length; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var name = data[i][0];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var skill = data[i][1];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var detail = data[i][2];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var date = data[i][3];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!pivotData[name]) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>pivotData[name] = {};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!pivotData[name][skill]) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>pivotData[name][skill] = {};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>pivotData[name][skill]["Detail"] = detail;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>pivotData[name][skill]["Date"] = date;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Generate the pivot table HTML</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var table = document.getElementById("pivotTable");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Create the table header</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var thead = table.createTHead();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var headerRow = thead.insertRow();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var nameHeader = headerRow.insertCell();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>nameHeader.textContent = "Name";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>nameHeader.rowSpan = 2;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var skillHeaderRow = thead.insertRow();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var skillHeaders = Object.keys(pivotData[data[0][0]]);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (var i = 0; i &lt; skillHeaders.length; i++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var skillHeader = skillHeaderRow.insertCell();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>skillHeader.textContent = skillHeaders[i];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Create the table body</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var tbody = table.createTBody();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>for (var name in pivotData) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var nameRow = tbody.insertRow();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var nameCell = nameRow.insertCell();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>nameCell.textContent = name;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>for (var j = 0; j &lt; skillHeaders.length; j++) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>var skillCell = nameRow.insertCell();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>var skill = skillHeaders[j];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (pivotData[name][skill]) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>skillCell.textContent = pivotData[name][skill]["Detail"];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>skillCell.setAttribute("data-date", pivotData[name][skill]["Date"]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Sort the table by date (if required)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var rows = Array.from(tbody.rows);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>rows.sort(function (a, b) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var aDate = new Date(a.cells[1].getAttribute("data-date"));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>var bDate = new Date(b.cells[1].getAttribute("data-date"));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return aDate - bDate;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>rows.forEach(function (row) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>tbody.appendChild(row);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Sample data</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>var data = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>["LUISITO BAUTISTA", "Driver Licence", "", "11/6/2025"],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>["Malith Maheepala", "Driver Licence", "", "3/1/2028"],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>["Malith Maheepala", "Civcon Induction", "", "5/4/2026"],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>["MANOLO FORMANES VELARDE", "Driver Licence", "", "8/7/202</span></p>
+</body>
+</html>
